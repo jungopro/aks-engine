@@ -1,0 +1,35 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {},
+  "variables": {  },
+  "resources": [
+    {
+      "apiVersion": "2016-03-30",
+      "location": "[resourceGroup().location]",
+      "name": "KubernetesCustomVNET",
+      "type": "Microsoft.Network/virtualNetworks",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.100.0.0/16"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "KubernetesSubnet",
+            "properties": {
+              "addressPrefix": "10.100.0.0/24"
+            }
+          },
+          {
+            "name": "AppGWSubnet",
+            "properties": {
+              "addressPrefix": "10.100.1.0/24"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

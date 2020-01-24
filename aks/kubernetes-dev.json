@@ -1,0 +1,41 @@
+{
+  "apiVersion": "vlabs",
+  "properties": {
+    "orchestratorProfile": {
+      "orchestratorType": "Kubernetes",
+      "orchestratorRelease": "1.16",
+      "OrchestratorVersion": "1.16.4",
+      "kubernetesConfig": {
+        "networkPolicy": "calico",
+        "networkPlugin": "azure"
+      }
+    },
+    "masterProfile": {
+      "count": 3,
+      "dnsPrefix": "",
+      "vmSize": "Standard_D2_v3"
+    },
+    "agentPoolProfiles": [
+      {
+        "name": "agentpool1",
+        "count": 3,
+        "vmSize": "Standard_D2_v3",
+        "availabilityProfile": "AvailabilitySet"
+      }
+    ],
+    "linuxProfile": {
+      "adminUsername": "jungopro",
+      "ssh": {
+        "publicKeys": [
+          {
+            "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDsVUBmlYlCX3nMMY+gwwS5hrGuMG+bw/K0n+f6F+g0uqTuCsQSuVfI4pqbHf+vIQLm0ZJjQtAPEcGCp2ryPbIePZ/gqhbeHfd/SbQWcVEruoOXBd2jdYzyrDGJYmJqTddcylpo7yt8r5CKxE/xTJFDRE41vXfMkrXDlhsgyyj5IOtn8Q5j4n1VV9MaUDJmVsLhh+iBrTIYRhyrYbLRDAcRBnArJiS59kN8Kjm1L7DVDgaFiCFyn5SFaBY//hlfzpcxUgLKhaZgR/bp01Z4IW3UGu5roAuHi2W71ecn39As7nkn1WHhWnTVDe8mSYVcdMuMeN1J08ciEln2B7jAR5ux omerbarel@omers-macpro-8.local"
+          }
+        ]
+      }
+    },
+    "servicePrincipalProfile": {
+      "clientId": "",
+      "secret": ""
+    }
+  }
+}
