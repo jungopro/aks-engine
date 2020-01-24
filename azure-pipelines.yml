@@ -5,7 +5,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: az login -u $(azuser) -p $(azpassword)
+- script: az login --service-principal -u $(azuser) -p $(azpass) --tenant $(aztenant)
   displayName: 'Login to Azure'
 
 - script: az account set --subscription $(azsub)
