@@ -44,4 +44,4 @@ tolerations: []
 affinity: {}
 
 policy:
-  enabled: false
+  enabled: true

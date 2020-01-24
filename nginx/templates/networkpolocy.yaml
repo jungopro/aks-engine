@@ -1,0 +1,21 @@
+{{- if .Values.policy.enabled }}
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: {{ template "nginx.name" . }}
+spec:
+  podSelector:
+    matchLabels:
+      app: {{ template "nginx.name" . }}
+  ingress:
+    - from:
+      - podSelector:
+          matchLabels:
+            app: nginx-ingress
+      - namespaceSelector:
+          matchLabels:
+            purpose: production
+      ports:
+        - protocol: TCP
+          port: 80
+{{- end }}
