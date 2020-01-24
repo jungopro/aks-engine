@@ -9,7 +9,9 @@ Every 10 minutes it will print the average price for the last 10 minutes
 
 *serviceB == nginx*
 
-A simple "hello world" nginx with no special config. used to demonstrate app redirect to a sub-path using ingress controller annotations
+A simple "hello world" nginx with no special config. Used to demonstrate: 
+- app redirect to a sub-path using ingress controller annotations (/serviceb)
+- network policy enforcement
 
 ## How To Run
 
