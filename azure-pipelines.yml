@@ -54,3 +54,6 @@ steps:
       aks-engine generate $FILENAME --set masterProfile.dnsPrefix=$RG,servicePrincipalProfile.clientId=$SPN_ID,servicePrincipalProfile.secret=$SPN_PASSWORD
     workingDirectory: '$(Build.SourcesDirectory)/aks'
   displayName: 'Generate AKS Template'
+  env:
+    SPN_ID: $(SPN_ID)
+    SPN_PASSWORD: $(SPN_PASSWORD)
