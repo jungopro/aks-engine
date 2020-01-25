@@ -17,7 +17,40 @@ steps:
     scriptLocation: 'inlineScript'
     inlineScript: |
       az deployment create \
-       --location $LOCATION \
-        --template-file 01-rg.json \
-        --parameters rgName=$RG rgLocation=$LOCATION
+      --location $LOCATION \
+      --template-file 01-rg.json \
+      --parameters rgName=$RG rgLocation=$LOCATION
     workingDirectory: '$(Build.SourcesDirectory)/aks'
+  displayName: 'Create Resource Group'
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'Visual Studio Enterprise – MPN(3211b6f2-32a6-410d-97b9-5c24bcda7d0b)'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az group deployment create \
+      --resource-group $RG \
+      --template-file 02-vnet.json
+    workingDirectory: '$(Build.SourcesDirectory)/aks'
+  displayName: 'Create vNet'
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'Visual Studio Enterprise – MPN(3211b6f2-32a6-410d-97b9-5c24bcda7d0b)'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      spn=$(az ad sp create-for-rbac --name "http://$RG-spn" --role="Contributor" --scopes="/subscriptions/$SUB_ID/resourceGroups/$RG")
+      ID=$(echo $spn | awk '{print $3}' | sed 's/\"//g' | sed 's/\,//g')
+      SECRET=$(echo $spn | awk '{print $9}' | sed 's/\"//g' | sed 's/\,//g')
+    workingDirectory: '$(Build.SourcesDirectory)/aks'
+  displayName: 'Create SPN'
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'Visual Studio Enterprise – MPN(3211b6f2-32a6-410d-97b9-5c24bcda7d0b)'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      echo "ID: $ID"
+      echo "Secret: $SECRET"
+    workingDirectory: '$(Build.SourcesDirectory)/aks'
+  displayName: 'Get SPN Information'
