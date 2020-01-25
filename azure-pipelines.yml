@@ -11,8 +11,9 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      az deployment create \
-       --location $LOCATION \
-        --template-file 01-rg.json \
-        --parameters rgName=$RG rgLocation=$LOCATION
+      ls -la 
+      # az deployment create \
+      #  --location $LOCATION \
+      #   --template-file 01-rg.json \
+      #   --parameters rgName=$RG rgLocation=$LOCATION
     workingDirectory: '$(Build.SourcesDirectory)\aks'
