@@ -21,7 +21,7 @@ def print_average(m, n):
 app = Flask(__name__)
 
 
-@app.route("/bitcoin")
+@app.route("/")
 def main():
     values = []
     total = 0
@@ -31,19 +31,14 @@ def main():
 
         price = get_latest_crypto_price(crypto)
         print('Bitcoin price: ', price)
-
-        # calculate average
         values.append(price)
         total = total + price
         average = total / len(values)
-
         if print_average(len(values), 10):
             print('average price is:', average)
             average = 0
-
-        time.sleep(60)
-
         return render_template('index.html', price=price, average=average)
+        time.sleep(60)
 
 
 if __name__ == "__main__":
