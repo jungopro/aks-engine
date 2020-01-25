@@ -1,5 +1,10 @@
 trigger:
-- master
+  branches:
+    include:
+    - master
+  paths:
+    exclude:
+    - azure-pipelines.yml
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -11,9 +16,9 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      ls -la 
+      ls -lRa 
       # az deployment create \
       #  --location $LOCATION \
       #   --template-file 01-rg.json \
       #   --parameters rgName=$RG rgLocation=$LOCATION
-    workingDirectory: '$(Build.SourcesDirectory)/aks'
+    workingDirectory: '$(Build.SourcesDirectory)'
