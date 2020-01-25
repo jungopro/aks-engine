@@ -16,4 +16,4 @@ steps:
       #  --location $LOCATION \
       #   --template-file 01-rg.json \
       #   --parameters rgName=$RG rgLocation=$LOCATION
-    workingDirectory: '$(Build.SourcesDirectory)\aks'
+    workingDirectory: '$(Build.SourcesDirectory)/aks'
