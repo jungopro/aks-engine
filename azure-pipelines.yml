@@ -53,4 +53,4 @@ steps:
     inlineScript: |
       aks-engine generate $FILENAME --set masterProfile.dnsPrefix=$RG,servicePrincipalProfile.clientId=$SPN_ID,servicePrincipalProfile.secret=$SPN_PASSWORD
     workingDirectory: '$(Build.SourcesDirectory)/aks'
-  displayName: 'Install aks-engine'
+  displayName: 'Generate AKS Template'
