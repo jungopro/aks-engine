@@ -44,4 +44,13 @@ steps:
       ./get-akse.sh
       aks-engine version
     workingDirectory: '$(Build.SourcesDirectory)/aks'
-  displayName: 'Install aks-enging'
+  displayName: 'Install aks-engine'
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'Visual Studio Enterprise – MPN(3211b6f2-32a6-410d-97b9-5c24bcda7d0b)'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      aks-engine generate $FILENAME --set masterProfile.dnsPrefix=$RG,servicePrincipalProfile.clientId=$SPN_ID,servicePrincipalProfile.secret=$SPN_PASSWORD
+    workingDirectory: '$(Build.SourcesDirectory)/aks'
+  displayName: 'Install aks-engine'
