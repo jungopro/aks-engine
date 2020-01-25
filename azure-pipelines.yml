@@ -78,6 +78,14 @@ steps:
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
     CleanTargetFolder: true
     OverWrite: true
+- task: AzureFileCopy@3
+  inputs:
+    SourcePath: '$(Build.SourcesDirectory)/aks/_output/$RG/kubeconfig/'
+    azureSubscription: 'Visual Studio Enterprise – MPN(3211b6f2-32a6-410d-97b9-5c24bcda7d0b)'
+    Destination: 'AzureBlob'
+    storage: 'jungoterraform'
+    ContainerName: 'aks-engine'
+    BlobPrefix: '$RG'
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifacts'
   inputs:
