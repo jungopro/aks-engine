@@ -5,7 +5,14 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: az login --service-principal -u $(azuser) -p $(azpass) --tenant $(aztenant)
-  displayName: 'Login to Azure'
-
-- script: az account set --subscription $(azsub)
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'Visual Studio Enterprise – MPN(3211b6f2-32a6-410d-97b9-5c24bcda7d0b)'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az deployment create \
+       --location $LOCATION \
+        --template-file 01-rg.json \
+        --parameters rgName=$RG rgLocation=$LOCATION
+    workingDirectory: '$(Build.SourcesDirectory)\aks'
