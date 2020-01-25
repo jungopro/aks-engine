@@ -66,3 +66,11 @@ steps:
       az group deployment validate --resource-group $RG --template-file _output/$RG/azuredeploy.json --parameters _output/$RG/azuredeploy.parameters.json
     workingDirectory: '$(Build.SourcesDirectory)/aks'
   displayName: 'Validate Generated Template'
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)/aks/_output'
+    Contents: |
+     **/*
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    CleanTargetFolder: true
+    OverWrite: true
