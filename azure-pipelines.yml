@@ -31,11 +31,9 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      az group deployment create \
-      --resource-group $RG \
-      --template-file 02-vnet.json
+      az role assignment create --assignee $SPN_ID --role Contributor --scope "/subscriptions/3211b6f2-32a6-410d-97b9-5c24bcda7d0b/resourceGroups/$RG"
     workingDirectory: '$(Build.SourcesDirectory)/aks'
-  displayName: 'Create vNet'
+  displayName: 'Grant SPN Access'
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'Visual Studio Enterprise – MPN(3211b6f2-32a6-410d-97b9-5c24bcda7d0b)'
