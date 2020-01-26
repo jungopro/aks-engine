@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: jungopro/bitcoin
-  tag: 0.0.2
+  tag: 0.0.5
   pullPolicy: IfNotPresent
 
 service:
