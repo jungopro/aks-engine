@@ -15,7 +15,7 @@ variables:
 steps:
 - task: AzureCLI@2
   inputs:
-    azureSubscription: 'Visual Studio Enterprise – MPN(3211b6f2-32a6-410d-97b9-5c24bcda7d0b)'
+    azureSubscription: 'MSDN'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
@@ -27,21 +27,22 @@ steps:
   displayName: 'Create Resource Group'
 - task: AzureCLI@2
   inputs:
-    azureSubscription: 'Visual Studio Enterprise – MPN(3211b6f2-32a6-410d-97b9-5c24bcda7d0b)'
+    azureSubscription: 'MSDN'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
       az role assignment create \
       --assignee $SPN_ID \
       --role Contributor \
-      --scope "/subscriptions/3211b6f2-32a6-410d-97b9-5c24bcda7d0b/resourceGroups/$RG"
+      --scope "/subscriptions/$SUB_ID/resourceGroups/$RG"
     workingDirectory: '$(Build.SourcesDirectory)/aks'
   env:
     SPN_ID: $(SPN_ID)
+    SUB_ID: $(SUB_ID)
   displayName: 'Grant SPN Access'
 - task: AzureCLI@2
   inputs:
-    azureSubscription: 'Visual Studio Enterprise – MPN(3211b6f2-32a6-410d-97b9-5c24bcda7d0b)'
+    azureSubscription: 'MSDN'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
@@ -53,7 +54,7 @@ steps:
   displayName: 'Install aks-engine'
 - task: AzureCLI@2
   inputs:
-    azureSubscription: 'Visual Studio Enterprise – MPN(3211b6f2-32a6-410d-97b9-5c24bcda7d0b)'
+    azureSubscription: 'MSDN'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
@@ -65,7 +66,7 @@ steps:
     SPN_PASSWORD: $(SPN_PASSWORD)
 - task: AzureCLI@2
   inputs:
-    azureSubscription: 'Visual Studio Enterprise – MPN(3211b6f2-32a6-410d-97b9-5c24bcda7d0b)'
+    azureSubscription: 'MSDN'
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
