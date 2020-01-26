@@ -31,21 +31,6 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      az role assignment create \
-      --assignee $SPN_ID \
-      --role Contributor \
-      --scope "/subscriptions/$SUB_ID/resourceGroups/$RG"
-    workingDirectory: '$(Build.SourcesDirectory)/aks'
-  env:
-    SPN_ID: $(SPN_ID)
-    SUB_ID: $(SUB_ID)
-  displayName: 'Grant SPN Access'
-- task: AzureCLI@2
-  inputs:
-    azureSubscription: 'MSDN'
-    scriptType: 'bash'
-    scriptLocation: 'inlineScript'
-    inlineScript: |
       curl -o get-akse.sh https://raw.githubusercontent.com/Azure/aks-engine/master/scripts/get-akse.sh
       chmod 700 get-akse.sh
       ./get-akse.sh
