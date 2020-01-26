@@ -41,7 +41,7 @@ def main():
 
         time.sleep(60)
 
-        return render_template('index.html', price=price)
+        return render_template('index.html', price=price, average=average)
 
 
 if __name__ == "__main__":

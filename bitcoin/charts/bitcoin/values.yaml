@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: jungopro/bitcoin
-  tag: 0.0.5
+  tag: 0.0.6
   pullPolicy: IfNotPresent
 
 service:
@@ -18,6 +18,7 @@ ingress:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "360"
     # kubernetes.io/tls-acme: "true"
   path: /bitcoin(/|$)(.*)
   hosts: {}
