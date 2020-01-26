@@ -30,15 +30,18 @@ def main():
     while True:
 
         price = get_latest_crypto_price(crypto)
-        print('Bitcoin price: ', price)
         values.append(price)
         total = total + price
         average = total / len(values)
+        print('Bitcoin price: ', price)
+
         if print_average(len(values), 10):
             print('average price is:', average)
             average = 0
-        return render_template('index.html', price=price, average=average)
+
         time.sleep(60)
+
+        return render_template('index.html', price=price)
 
 
 if __name__ == "__main__":
